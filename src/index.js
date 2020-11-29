@@ -1,13 +1,13 @@
 /* React */
-import React, { useState, useRef } from "react";
-import ReactDom from "react-dom";
+import React, { useState, useRef } from 'react';
+import ReactDom from 'react-dom';
 /* Muuri-react */
-import { MuuriComponent } from "muuri-react";
+import { MuuriComponent } from 'muuri-react';
 /* Utils & components */
-import { generateItems, options } from "./utils";
-import { Select, Header, Footer, Button, Demo, Item } from "./components";
+import { generateItems, options } from './utils';
+import { Select, Header, Footer, Button, Demo, Item } from './components';
 /* Style */
-import "./style.css";
+import './style.css';
 
 // App.
 const App = () => {
@@ -19,8 +19,8 @@ const App = () => {
 
   // Sort state.
   const [sort, setSort] = useState({
-    keys: null,
-    value: "title"
+    keys: 'Color (no drag)',
+    value: 'color',
   });
 
   // Children.
@@ -31,7 +31,7 @@ const App = () => {
       title={title}
       width={width}
       height={height}
-      remove={() => setItems(items.filter(item => item.id !== id))}
+      remove={() => setItems(items.filter((item) => item.id !== id))}
     />
   ));
 
@@ -42,18 +42,18 @@ const App = () => {
         <Select
           values={[
             // Text => Value.
-            ["Title (no drag)", "title"],
-            ["Color (no drag)", "color"],
-            ["Drag", "drag"]
+            ['Color (no drag)', 'color'],
+            ['Title (no drag)', 'title'],
+            ['Drag', 'drag'],
           ]}
-          onChange={e => {
+          onChange={(e) => {
             // Value of the select component.
             const value = e.target.value;
             // Save the keys if in the old sort value
             // the drag was enabled.
             const keys =
-              sort.value === "drag"
-                ? muuriRef.current.getItems().map(item => item.getKey())
+              sort.value === 'drag'
+                ? muuriRef.current.getItems().map((item) => item.getKey())
                 : sort.keys;
 
             setSort({ value, keys });
@@ -64,10 +64,9 @@ const App = () => {
       <MuuriComponent
         {...options}
         ref={muuriRef}
-        dragEnabled={sort.value === "drag"}
-        sort={sort.value === "drag" ? sort.keys : sort.value}
-        propsToData={({ color, title }) => ({ color, title })}
-      >
+        dragEnabled={sort.value === 'drag'}
+        sort={sort.value === 'drag' ? sort.keys : sort.value}
+        propsToData={({ color, title }) => ({ color, title })}>
         {children}
       </MuuriComponent>
       {/* Footer */}
@@ -78,4 +77,4 @@ const App = () => {
   );
 };
 
-ReactDom.render(<App />, document.getElementById("root"));
+ReactDom.render(<App />, document.getElementById('root'));
